@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Mubarak 🌙✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Josefin+Sans&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+:root {
+    --bg:#0a0612;
+    --text:#fff5ff;
+    --gold:#f0c97a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:'Josefin Sans',sans-serif;
+    color:var(--text);
+    background: linear-gradient(to bottom, #0a0612, #1a0a2e);
+    overflow-x:hidden;
+}
+
+/* MOON */
+.moon-bg{
+    position:fixed;
+    top:80px;
+    right:80px;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background: radial-gradient(circle,#fff5aa,#f0c97a);
+    box-shadow:0 0 60px rgba(255,230,150,0.6);
+    z-index:-1;
+}
+
+/* STARS */
+.star{
+    position:fixed;
+    width:2px;
+    height:2px;
+    background:white;
+    opacity:0.7;
+    z-index:-1;
+    animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+/* CENTER SECTIONS */
+section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:2rem;
+}
+
+/* PORTAL */
+#portal{
+    position:fixed;
+    inset:0;
+    background:#0a0612;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    z-index:10;
+}
+
+.portal-text{
+    font-family:'Amiri',serif;
+    font-size:3rem;
+    color:#f5c6e8;
+}
+
+.open-btn{
+    padding:12px 30px;
+    border:1px solid #f0c97a;
+    background:none;
+    color:white;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero-name{
+    font-family:'Amiri',serif;
+    font-size:5rem;
+}
+
+/* CARDS */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    max-width:600px;
+}
+
+.card{
+    padding:20px;
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:15px;
+}
+
+/* SHAYARI */
+.story-line{
+    font-family:'Amiri',serif;
+    font-size:2rem;
+    margin:20px 0;
+}
+
+/* MOON BUTTON */
+.moon{
+    font-size:5rem;
+    margin:20px 0;
+    cursor:pointer;
+}
+
+/* FINAL MESSAGE */
+#final-msg{
+    display:none;
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="moon-bg"></div>
+
+<!-- PORTAL -->
+<div id="portal">
+    <p>Eid ka Tyohar</p>
+    <h1 class="portal-text">Eid Mubarak 🌙</h1>
+    <button class="open-btn" onclick="start()">Andar Aao</button>
+</div>
+
+<!-- HERO -->
+<section>
+    <h1 class="hero-name">Eid Mubarak</h1>
+    <p>✨ Khushiyon ka din ✨</p>
+</section>
+
+<!-- CARDS -->
+<section>
+    <div class="grid">
+        <div class="card">
+            <h3>Khushiyan</h3>
+            <p>Eid khushiyon ka tyohar hai ❤️</p>
+        </div>
+
+        <div class="card">
+            <h3>Barkat</h3>
+            <p>Allah tumhari zindagi mein barkat de</p>
+        </div>
+
+        <div class="card">
+            <h3>Dua</h3>
+            <p>Har dua qubool ho 🤲</p>
+        </div>
+
+        <div class="card">
+            <h3>Mohabbat</h3>
+            <p>Sabke dilon mein pyaar ho</p>
+        </div>
+    </div>
+</section>
+
+<!-- SHAYARI -->
+<section>
+    <p class="story-line">Us se milna to use Eid Mubarak kehna...</p>
+    <p class="story-line">ye bhi kehna...</p>
+    <p class="story-line">ki meri Eid Mubarak kar de. 🌙✨</p>
+</section>
+
+<!-- INTERACTION -->
+<section>
+    <h2>Dua Maango ✨</h2>
+    <div class="moon" onclick="celebrate()">🌙</div>
+    <p>Moon par click karo</p>
+
+    <div id="final-msg">
+        <h2>Eid Mubarak 🌙✨</h2>
+        <p>Allah tumhari har dua qubool kare 🤍</p>
+    </div>
+</section>
+
+<script>
+function start(){
+    document.getElementById("portal").style.display="none";
+}
+
+/* STARS */
+for(let i=0;i<80;i++){
+    const s=document.createElement("div");
+    s.className="star";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+}
+
+/* CONFETTI */
+function celebrate(){
+    const end=Date.now()+2000;
+
+    (function frame(){
+        confetti({particleCount:5,spread:60});
+        if(Date.now()<end){
+            requestAnimationFrame(frame);
+        }
+    })();
+
+    document.getElementById("final-msg").style.display="block";
+}
+</script>
+
+</body>
+</html>
